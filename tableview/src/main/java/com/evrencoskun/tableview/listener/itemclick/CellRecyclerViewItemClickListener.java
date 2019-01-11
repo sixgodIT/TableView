@@ -42,33 +42,7 @@ public class CellRecyclerViewItemClickListener extends AbstractItemClickListener
 
     @Override
     protected boolean clickAction(RecyclerView view, MotionEvent e) {
-        // Get interacted view from x,y coordinate.
-        View childView = view.findChildViewUnder(e.getX(), e.getY());
-
-        if (childView != null && mGestureDetector.onTouchEvent(e)) {
-            // Find the view holder
-            AbstractViewHolder holder = (AbstractViewHolder) mRecyclerView.getChildViewHolder
-                    (childView);
-
-            // Get y position from adapter
-            CellRowRecyclerViewAdapter adapter = (CellRowRecyclerViewAdapter) mRecyclerView
-                    .getAdapter();
-
-            int column = holder.getAdapterPosition();
-            int row = adapter.getYPosition();
-
-            // Control to ignore selection color
-            if (!mTableView.isIgnoreSelectionColors()) {
-                mSelectionHandler.setSelectedCellPositions(holder, column, row);
-            }
-
-            if (getTableViewListener() != null) {
-                // Call ITableView listener for item click
-                getTableViewListener().onCellClicked(holder, column, row);
-            }
-
-            return true;
-        }
+        // Get interacted view from x,y coordinate
         return false;
     }
 
